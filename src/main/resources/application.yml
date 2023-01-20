@@ -5,4 +5,4 @@ spring:
 
 ####### Mongock Properties ###########
 mongock:
-  change-logs-scan-package: pl.walczak.jakub.mongodbmigrationspoc.dbmigrations
+  migration-scan-package: pl.walczak.jakub.mongodbmigrationspoc.dbmigrations
