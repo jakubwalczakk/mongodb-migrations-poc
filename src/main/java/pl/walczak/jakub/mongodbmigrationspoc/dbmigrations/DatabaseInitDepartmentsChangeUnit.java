@@ -3,10 +3,12 @@ package pl.walczak.jakub.mongodbmigrationspoc.dbmigrations;
 import io.mongock.api.annotations.ChangeUnit;
 import io.mongock.api.annotations.Execution;
 import io.mongock.api.annotations.RollbackExecution;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import pl.walczak.jakub.mongodbmigrationspoc.entity.Department;
 import pl.walczak.jakub.mongodbmigrationspoc.repository.DepartmentRepository;
 
+@Log4j2
 @ChangeUnit(order = "001", id = "init_departments")
 public class DatabaseInitDepartmentsChangeUnit {
 
@@ -18,6 +20,7 @@ public class DatabaseInitDepartmentsChangeUnit {
 
     @Execution
     public void initDepartments(DepartmentRepository departmentRepository) {
+        log.info("Init departments");
         departmentRepository.save(Department.builder()
                 .name("Human Resource Management")
                 .code("HR")

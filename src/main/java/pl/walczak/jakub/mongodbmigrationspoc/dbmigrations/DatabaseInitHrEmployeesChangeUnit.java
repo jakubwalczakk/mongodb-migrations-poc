@@ -3,6 +3,7 @@ package pl.walczak.jakub.mongodbmigrationspoc.dbmigrations;
 import io.mongock.api.annotations.ChangeUnit;
 import io.mongock.api.annotations.Execution;
 import io.mongock.api.annotations.RollbackExecution;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import pl.walczak.jakub.mongodbmigrationspoc.entity.Department;
 import pl.walczak.jakub.mongodbmigrationspoc.entity.Employee;
@@ -11,7 +12,8 @@ import pl.walczak.jakub.mongodbmigrationspoc.repository.EmployeeRepository;
 
 import java.util.Optional;
 
-@ChangeUnit(order = "002", id = "init_hr_departments")
+@Log4j2
+@ChangeUnit(order = "003", id = "init_hr_departments")
 public class DatabaseInitHrEmployeesChangeUnit {
 
     private final MongoTemplate mongoTemplate;
@@ -23,6 +25,8 @@ public class DatabaseInitHrEmployeesChangeUnit {
     @Execution
     public void initHrEmployees(EmployeeRepository employeeRepository,
                                 DepartmentRepository departmentRepository) {
+        log.info("Init hr employees");
+
         Optional<Department> hrDepartment = departmentRepository.findAllByCode("HR");
 
         if (hrDepartment.isPresent()) {
